@@ -78,8 +78,6 @@
 
 		<title>Dog-a-Day</title>
 		<link rel="stylesheet" type="text/css" href="assets/main.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script> 
-		<script src="assets/main.js"></script>
 	</head>
 	<body>
 		<img class="header" src="DogADay.png" alt="Dog-a-Day">
