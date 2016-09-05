@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Valid User"
+AuthUserFile /var/www/alexbeals.com/public_html/projects/puppies/.htpasswd
+Require valid-user
