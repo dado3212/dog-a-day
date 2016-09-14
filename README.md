@@ -1,4 +1,4 @@
-# Dog-a-Day
+# <img src="/DogADay.png?raw=true" width="200" alt="Logo"/>
 
 ### Why
 Originally, Dog-a-Day was a Christmas present for my dad that sent him a cute picture of a puppy every morning.  However, I figured while I was doing this, I might as well add other people, which turned into a full subscription based service.
