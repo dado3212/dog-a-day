@@ -77,7 +77,15 @@
 		<meta name="description" content="Sign up to get a dog to your inbox every day.">
 
 		<title>Dog-a-Day</title>
-		<link rel="stylesheet" type="text/css" href="assets/main.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+		<!-- FancyBox -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+		<script src="assets/js/main.js"></script>
 	</head>
 	<body>
 		<img class="header" src="DogADay.png" alt="Dog-a-Day">
@@ -91,9 +99,26 @@
 		foreach ($sorted_images as $yearDate => $year) {
 			echo "<div class='year'>";
 			echo "<span class='year'>Previous Dogs - $yearDate</span>";
+			$monthIndex = 0;
 			foreach ($year as $monthDate => $month) {
-				echo "<div class='month'>";
+				if (date('F') == $monthDate) {
+					echo "<div class='month active'>";
+				} else {
+					echo "<div class='month'>";
+				}
+				echo "<div class='header'>";
+				if ($monthIndex != 0) {
+					echo "<button class='prev'>Previous</button>";
+				} else {
+					echo "<button class='prev hidden'>Previous</button>";
+				}
 				echo "<span class='month'>$monthDate</span>";
+				if ($monthIndex != count($year) - 1) {
+					echo "<button class='next'>Next</button>";
+				} else {
+					echo "<button class='next hidden'>Next</button>";
+				}
+				echo "</div>";
 				foreach ($month as $image) {
 					$day = date("j", $image["date"]);
 					$url = $image["url"];
@@ -103,11 +128,14 @@
 					} else {
 						$thumbnail = substr($url, 0, -4) . "t" . substr($url, -4);
 					}
-					echo "<a class='day' href='$url' target='_blank' rel='noopener' style='background-image: url($thumbnail);'>";
+					echo "<a class='fancybox day' rel='group' href='$url' style='background-image: url($thumbnail);'>";
+					// echo "<a class='day' href='$url' target='_blank' rel='noopener' style='background-image: url($thumbnail);'>";
 					echo "<span class='day'>$day</span>";
 					echo "</a>";
 				}
 				echo "</div>";
+
+				$monthIndex += 1;
 			}
 			echo "</div>";
 		}
