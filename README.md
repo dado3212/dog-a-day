@@ -5,13 +5,13 @@ Originally, Dog-a-Day was a Christmas present for my dad that sent him a cute pi
 
 ### Services
 * View all previously sent Dog-a-Day images
+* FancyBox integration for high quality image viewing
 * Subscribe, or sign up others
 * MailChimp integration for tracking of opens, and easy automated sending
 * Backend for easily adding images, and pointing out possible duplicates
 
 ### Still To Do
 * Flesh out backend for customized images
-* Reorganize viewing past images to make it easier
 * Monetize/add image sources
 
 ---
@@ -19,6 +19,7 @@ Originally, Dog-a-Day was a Christmas present for my dad that sent him a cute pi
 * HTML
 * PHP
 * CSS
+* JS
 * MySQL
 * MailChimp
 
