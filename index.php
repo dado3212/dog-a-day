@@ -83,7 +83,7 @@
 		<img class="header" src="DogADay.png" alt="Dog-a-Day">
 
 		<div class="subscribe">
-			<p> Add someone to Dog-a-Day!  Just submit the person's name, and email, and they'll start
+			<p>Add someone to Dog-a-Day!  Just submit the person's name, and email, and they'll start
 			receiving a dog straight to their inbox every morning at 7am PST.</p>
 			<a id="subscribe" href="http://eepurl.com/cd9UQf">SUBSCRIBE</a>
 		</div>
@@ -103,7 +103,7 @@
 					} else {
 						$thumbnail = substr($url, 0, -4) . "t" . substr($url, -4);
 					}
-					echo "<a class='day' href='$url' target='_blank' style='background-image: url($thumbnail);'>";
+					echo "<a class='day' href='$url' target='_blank' rel='noopener' style='background-image: url($thumbnail);'>";
 					echo "<span class='day'>$day</span>";
 					echo "</a>";
 				}
