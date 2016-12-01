@@ -9,6 +9,9 @@
 	// Include to send emails
 	include("mailchimp.php");
 
+	// Include to send Instagrams
+	include("instagram.php");
+
 	// Open up a database connection
 	$PDO = createConnection();
 
@@ -34,7 +37,20 @@
 		"A good start to the day!",
 	];
 
+	// Pull the greeting, or generate one
+	if ($image["email"] == "") {
+		$greeting = $greetings[rand(0,count($greetings)-1)];
+	} else {
+		$greeting = $image["email"];
+	}
 	// Create and send a campaign using MailChimp
-	$greeting = $greetings[rand(0,count($greetings)-1)];
 	createCampaign($image["url"], $greeting);
+
+	// Post photo to Instagram (or at least try)
+	if ($image["instagram"] == "") {
+		$caption = "The dog for " . date("F j") . "! #dogaday #dog #dogsofinsta";
+	} else {
+		$caption = "The dog for " . date("F j") . "! " . $image["instagram"];
+	}
+  postPhoto($image["url"], $caption, false);
 ?>
