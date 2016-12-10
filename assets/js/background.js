@@ -32,6 +32,8 @@ function drop(evt) {
   $('#image').removeClass('blank');
   $('form input[name="url"]').val(imageUrl);
 
+  $('#chosen span').html(imageUrl);
+
   // Update all of the relevant images (and possible warning)
   $.post("similar.php", { url: imageUrl })
   .done(function(data) {

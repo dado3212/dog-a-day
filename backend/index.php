@@ -31,6 +31,8 @@
 			$stmt->bindValue(":email", $_POST["caption"], PDO::PARAM_STR);
 			$stmt->bindValue(":instagram", $_POST["ig"], PDO::PARAM_STR);
 			$stmt->execute();
+
+            $last_date = strtotime($_POST["date"]);
 		}
 	}
 ?>
@@ -81,9 +83,10 @@
     <img class="header" src="../DogADay.png" alt="Dog-a-Day">
 
     <div class="details">
-    	<div id="image" class="blank" ondrop="drop(event);" ondragover="return false;">
-    		<!-- <img src="http://i.imgur.com/HvTNJET.jpg" /> -->
-    	</div>
+        <div id="chosen">
+    	   <div id="image" class="blank" ondrop="drop(event);" ondragover="return false;"></div>
+           <span></span>
+        </div>
     	<div id="text">
 	    	<form action="" method="POST" onsubmit="return verify(event);">
 	    		<label for="caption">Email Label</label>
