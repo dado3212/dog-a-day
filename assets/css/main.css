@@ -77,8 +77,9 @@ img.header {
 }
 
 /* Past Pictures Styling */
-span.year {
+h3 {
 	font-size: 2.25em;
+	margin: 0px;
 
 	display: block;
 	text-align: center;
@@ -129,7 +130,7 @@ div.month:not(.active) {
 
 span.month {
 	font-size: 1.75em;
-	width: 6em;
+	width: 10em;
 	padding-bottom: 5px;
 	display: inline-block;
 	vertical-align: middle;

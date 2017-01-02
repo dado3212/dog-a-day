@@ -95,28 +95,28 @@
 			receiving a dog straight to their inbox every morning at 7am PST.</p>
 			<a id="subscribe" href="http://eepurl.com/cd9UQf">SUBSCRIBE</a>
 		</div>
+		<h3>Previous Dogs</h3>
 	<?php
+		$yearIndex = 0;
 		foreach ($sorted_images as $yearDate => $year) {
-			echo "<div class='year'>";
-			echo "<span class='year'>Previous Dogs - $yearDate</span>";
 			$monthIndex = 0;
 			foreach ($year as $monthDate => $month) {
-				if (date('F') == $monthDate) {
+				if (date('F') == $monthDate && date('Y') == $yearDate) {
 					echo "<div class='month active'>";
 				} else {
 					echo "<div class='month'>";
 				}
 				echo "<div class='header'>";
-				if ($monthIndex != 0) {
-					echo "<button class='prev'>Previous</button>";
-				} else {
+				if ($monthIndex == 0 && $yearIndex == 0) {
 					echo "<button class='prev hidden'>Previous</button>";
-				}
-				echo "<span class='month'>$monthDate</span>";
-				if ($monthIndex != count($year) - 1) {
-					echo "<button class='next'>Next</button>";
 				} else {
+					echo "<button class='prev'>Previous</button>";
+				}
+				echo "<span class='month'>$yearDate - $monthDate</span>";
+				if ($monthIndex == count($year) - 1 && $yearIndex == count($sorted_images) - 1) {
 					echo "<button class='next hidden'>Next</button>";
+				} else {
+					echo "<button class='next'>Next</button>";
 				}
 				echo "</div>";
 				foreach ($month as $image) {
@@ -129,7 +129,6 @@
 						$thumbnail = substr($url, 0, -4) . "t" . substr($url, -4);
 					}
 					echo "<a class='fancybox day' rel='group' href='$url' style='background-image: url($thumbnail);'>";
-					// echo "<a class='day' href='$url' target='_blank' rel='noopener' style='background-image: url($thumbnail);'>";
 					echo "<span class='day'>$day</span>";
 					echo "</a>";
 				}
@@ -137,7 +136,7 @@
 
 				$monthIndex += 1;
 			}
-			echo "</div>";
+			$yearIndex += 1;
 		}
 	?>
 	</body>
