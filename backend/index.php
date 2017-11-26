@@ -28,7 +28,7 @@
 			$stmt->bindValue(":url", $_POST["url"], PDO::PARAM_STR);
 			$stmt->bindValue(":date", strtotime($_POST["date"]), PDO::PARAM_STR);
 			$stmt->bindValue(":hash", $image->getHasString(), PDO::PARAM_STR);
-			$stmt->bindValue(":email", $_POST["caption"], PDO::PARAM_STR);
+			$stmt->bindValue(":email", (empty($_POST["caption"]) ? "" : $_POST["caption"]), PDO::PARAM_STR);
 			$stmt->bindValue(":instagram", $_POST["ig"], PDO::PARAM_STR);
 			$stmt->execute();
 
@@ -90,7 +90,7 @@
     	<div id="text">
 	    	<form action="" method="POST" onsubmit="return verify(event);">
 	    		<label for="caption">Email Label</label>
-	    		<textarea name="caption" rows=3 placeholder="A good start to the day!" required></textarea>
+	    		<textarea name="caption" rows=3 placeholder="A good start to the day!"></textarea>
 
 	    		<label for="ig">Instagram Caption</label>
 	    		<textarea name="ig" rows=3 placeholder="#dogaday #dog #dogsofinsta" required> #dogaday #dog #dogsofinsta</textarea>

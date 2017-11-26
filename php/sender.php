@@ -37,20 +37,23 @@
 		"A good start to the day!",
 	];
 
-	// Pull the greeting, or generate one
-	if ($image["email"] == "") {
-		$greeting = $greetings[rand(0,count($greetings)-1)];
-	} else {
-		$greeting = $image["email"];
-	}
-	// Create and send a campaign using MailChimp
-	createCampaign($image["url"], $greeting);
+	// Only send an email/attempt to post if there's an image
+	if ($image) {
+		// Pull the greeting, or generate one
+		if ($image["email"] == "") {
+			$greeting = $greetings[rand(0,count($greetings)-1)];
+		} else {
+			$greeting = $image["email"];
+		}
+		// Create and send a campaign using MailChimp
+		createCampaign($image["url"], $greeting);
 
-	// Post photo to Instagram (or at least try)
-	if ($image["instagram"] == "") {
-		$caption = "The dog for " . date("F j") . "! #dogaday #dog #dogsofinsta";
-	} else {
-		$caption = "The dog for " . date("F j") . "! " . $image["instagram"];
+		// Post photo to Instagram (or at least try)
+		if ($image["instagram"] == "") {
+			$caption = "The dog for " . date("F j") . "! #dogaday #dog #dogsofinsta";
+		} else {
+			$caption = "The dog for " . date("F j") . "! " . $image["instagram"];
+		}
+	  postPhoto($image["url"], $caption, false);
 	}
-  postPhoto($image["url"], $caption, false);
 ?>

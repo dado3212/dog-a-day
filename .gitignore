@@ -1,3 +1,4 @@
 .htpasswd
 php/secret.php
 php/hash.php
+flickr/secret.php
