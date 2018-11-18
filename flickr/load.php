@@ -17,18 +17,35 @@
     $url .= '&height=1024';
     $url .= '&width=1024';
     $url .= '&nojsoncallback=1';
+    $url .= '&extras=' . urlencode("url_h,url_k,url_o,url_l");
     $url .= "&page=" . $page;
 
     $response = json_decode(file_get_contents($url), true);
 
+    $response_photos = array_filter($response["photos"]["photo"], function($photo) {
+      return !in_array($photo['owner'], [
+        '10937887@N00',
+        '167230489@N03',
+      ]);
+    });
+
     $size = "z"; // m - medium, z - bigger, b - biggest
 
     $photos = [];
-    foreach ($response["photos"]["photo"] as $photo) {
+    foreach ($response_photos as $photo) {
+      // echo "<pre>" . var_export($photo, true) . "</pre>";
+      if (isset($photo['url_k'])) {
+        $big = $photo['url_k'];
+      } elseif (isset($photo['url_o']) && max($photo['height_o'], $photo['width_o']) < 3000) {
+        $big = $photo['url_o'];
+      } else {
+        $big = $photo['url_l'];
+      }
       $photos[] = [
         "small" => "https://farm{$photo["farm"]}.staticflickr.com/{$photo["server"]}/{$photo["id"]}_{$photo["secret"]}_{$size}.jpg",
-        "big" => "https://farm{$photo["farm"]}.staticflickr.com/{$photo["server"]}/{$photo["id"]}_{$photo["secret"]}_b.jpg",
-        "query" => $query
+        "big" => $big,
+        "query" => $query,
+        "owner" => $photo["owner"],
       ];
     }
     return $photos;

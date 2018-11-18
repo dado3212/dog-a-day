@@ -48,11 +48,23 @@
 		// Create and send a campaign using MailChimp
 		createCampaign($image["url"], $greeting);
 
-		// Post photo to Instagram (or at least try)
-		if ($image["instagram"] == "") {
-			$caption = "The dog for " . date("F j") . "! #dogaday #dog #dogsofinsta";
+		// Post photo to Instagram (or at least try) (use email caption if there's no IG specific one)
+		$caption = $image["instagram"] == "" ? "#dogaday #dog #dogsofinsta" : trim($image["instagram"]);
+		$chunks = explode(" ", $caption);
+		$start = 0;
+		for ($i = 0; $i < count($chunks); $i++) {
+		  if ($chunks[$i][0] == '#') {
+		    $start = $i;
+		    break;
+		  }
+		}
+		$suffix = implode(" ", array_slice($chunks, $start));
+		if ($caption == $suffix && $image["email"] == "") {
+		  $caption = "The dog for " . date("F j") . "! $suffix";
+		} else if ($caption == $suffix) {
+		  $caption = "The dog for " . date("F j") . "! " . $image["email"] . " $suffix";
 		} else {
-			$caption = "The dog for " . date("F j") . "! " . $image["instagram"];
+		  $caption = "The dog for " . date("F j") . "! " . $image["instagram"];
 		}
 	  postPhoto($image["url"], $caption, false);
 	}

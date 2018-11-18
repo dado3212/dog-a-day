@@ -1,7 +1,7 @@
 <?php
 	include_once("secret.php");
 
-	function createCampaign($url, $message) {
+	function createCampaign($url, $message, $just_me = false) {
 		global $server;
 		global $api_key;
 
@@ -10,9 +10,6 @@
 			"type" => "regular",
 			"recipients" => [
 				"list_id" => "58e7ee09d2",
-				// "segment_opts" => [ // comment section to send to everyone
-				// 	"saved_segment_id" => 1393,
-				// ],
 			],
 			"settings" => [
 				"subject_line" => "Dog-a-Day: *|DATE:F jS|*",
@@ -22,6 +19,9 @@
 				"to_name" => "*|FNAME|*",
 			],
 		];
+		if ($just_me) {
+			$data["recipients"]["segment_opts"] = [ "saved_segment_id" => 1393 ];
+		}
 		$data_string = json_encode($data);
 
 		$ch = curl_init("https://$server.api.mailchimp.com/3.0/campaigns");
@@ -38,7 +38,7 @@
 			"template" => [
 				"id" => 5557,
 				"sections" => [
-					"message" => "$message",
+					"message" => str_replace("\n", "<br>", $message),
 					"image" => "<img src='$url' alt='Dog-a-Day' width='480' border='0' class='emailImage'>",
 				],
 			],
